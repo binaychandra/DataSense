@@ -1,4 +1,4 @@
-Faker==19.6.1
+Faker==19.6.2
 Flask==2.2.2
 Flask_Bootstrap==3.3.7.1
 langchain==0.0.304
