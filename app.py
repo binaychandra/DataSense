@@ -221,6 +221,7 @@ def data():
 
     return render_template('data.html', table_htmls = tbl_htmls, req_tables = json.dumps(tbl_selected[0]))
 
+@app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
 def hometest():
     if request.method == 'GET':
