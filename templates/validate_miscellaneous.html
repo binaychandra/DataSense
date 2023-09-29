@@ -1,0 +1,47 @@
+{% extends 'lay_side.html' %}
+
+{% block css %}
+<!-- style="pointer-events: none;color: #ccc;cursor: not-allowed;" -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/validate_style.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- Dashboard Content -->
+<div class="dashboard-content">
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="h3" style="font-weight: bolder;">Data Completeness Stats</h3>
+        <p>The graph illustrates the percentage of GUI matching with various tables, 
+          offering valuable statistics to guide dataset selection decisions. This information is 
+          beneficial as it aids in assessing dataset suitability, ensuring that the chosen dataset 
+          aligns with specific project requirements and objectives. Additionally, 
+          it streamlines decision-making processes and enhances data quality and project outcomes.
+        </p>
+        <canvas id="alltable_matchbar"></canvas>
+      </div>
+    </div>
+  </div>
+  <br>
+  {% endblock %}
+
+  {% block javascript %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='js/validate_script.js') }}"></script>  
+  <!-- Add any additional JavaScript specific to data.html here -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.5.1/plotly.min.js"></script>
+  <!-- Bootstrap JS (Make sure to include this before your custom JS, if any) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    var jsonData = {{ json_data | safe }};
+    var jsonEmpDist = {{ json_empdist | safe}};
+    var json_rankwise_empdist = {{ json_rankwise_empdist | safe }};
+  </script>
+
+  {% endblock %}

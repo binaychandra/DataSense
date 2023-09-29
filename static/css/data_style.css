@@ -1,0 +1,72 @@
+.tab {
+    position: relative;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    font-weight: bolder;
+    color:darkslategray;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 12px;
+    transition: background-color 0.3s ease;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+div.dataTables_wrapper {
+    margin: 0 auto;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #84888d;
+    border-color: #929ba4;
+}
+
+.fixed-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    /* margin-top: 50px; */
+    padding: 15px;
+    padding-right: 50px;
+    background-color: #f8f9fa;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+/* Define your custom button color */
+.btn-custom-color {
+    background-color:  rgb(17, 67, 86); /* Replace 'specific-color' with your desired color */
+    color: rgb(168, 167, 167); /* Set text color to white to ensure readability on colored backgrounds */
+    border-color:  rgb(17, 67, 86); /* Set border color to match the background color */
+}
+
+/* If you want to change the color of the button on hover and active states as well */
+.btn-custom-color:hover,
+.btn-custom-color:active,
+.btn-custom-color:focus {
+    background-color:  rgb(17, 67, 86); /* Replace 'specific-hover-color' with the desired hover color */
+    color: rgb(209, 212, 214);
+    border-color:  rgb(38, 144, 185);
+}
+
+.content {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+

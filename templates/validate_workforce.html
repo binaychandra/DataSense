@@ -1,0 +1,153 @@
+{% extends 'lay_side.html' %}
+
+{% block css %}
+<!-- style="pointer-events: none;color: #ccc;cursor: not-allowed;" -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/validate_style.css') }}">
+{% endblock %}
+
+{% block content %}
+<br>
+
+<!-- Dashboard Content -->
+<div class="dashboard-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3" >
+        <div class="card headstats">
+          <div class="card-body">
+            <h5 class="card-title">Employee Count</h5>
+            <p class="card-text">{{ table_info['unique_gui'] }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card headstats">
+          <div class="card-body">
+            <h5 class="card-title">Record Count</h5>
+            <p class="card-text">{{ table_info['n_rows'] }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card headstats">
+          <div class="card-body">
+            <h5 class="card-title"> # Features</h5>
+            <p class="card-text">{{ table_info['n_cols'] }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card headstats">
+          <div class="card-body">
+            <h5 class="card-title">Placeholder</h5>
+            <p class="card-text">Yes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="h3" style="font-weight: bolder;">Data Validation Stats</h3>
+        <p>Each entry has been validated and categorized into one of the designated groups. 
+          The columns against which validation was performed in the input data are depicted on the Y-axis. 
+          The validation statistics are represented as a bar chart, displaying the percentage for each category.
+        </p>
+        <canvas id="validationbar"></canvas>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <div class="card-body">
+                    <h5 class="card-title"><span class="badge badge-primary">Gender Analysis</span></h5>
+                    <!-- <p class="card-text">The organization's workforce composition is characterized by a <i class="fa-solid fa-arrow-trend-up"></i> <span style="font-size: 24px; font-weight: bolder;color: #0d3460;">13</span>% higher representation of men compared to women, resulting in a diverse and varied cultural mix within the company.</p> -->
+                    <p class="card-text">{{ aicontent_genderanalysis }}</p>
+                </div>
+            </div>
+            <!-- <div class="col-md-8"> -->
+              <div class="card mt-4" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                  <div class="card-body">
+                      <h5 class="card-title"><span class="badge badge-success">Department Analysis</span></h5>
+                      <p class="card-text">There are 402 distinct departments in the datasets and below are top ten departments based on number of employees.</p>
+                        
+                          <p class="card-text">
+                            {% for item in lst_topfive_dept %}
+                            <span class="badge badge-secondary"> {{ item }} </span>
+                            {% endfor %}
+                          </p>
+                        
+                    </div>
+              </div>
+            <!-- </div> -->
+        </div>
+        
+        <div class="col-md-5">
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <div class="card-body">
+                    <h5 class="card-title"><span class="badge badge-info">Rank Distribution</span></h5>
+                    <!-- <p class="card-text">There are <i class="fa-solid fa-arrow-trend-up"></i> <span style="font-size: 36px; font-weight: bolder;color: #0d3460;">21</span>% more men than women in workforce. Which makes it diversified culture for the organization.</p> -->
+                    <canvas id="doughnutChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<br>
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="h3" style="font-weight: bolder;">Visualizing Employee Count Over Time</h3>
+        <p>This chart displays the employee count over time, month by month. 
+          The bars represent the total employee count, while the lines show counts specific to different ranks. 
+          Dive into the insights about our workforce's evolution.
+        </p>
+        <canvas id="line_rankdistribution"></canvas>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="h3" style="font-weight: bolder;">Employee Distribution across cities</h3>
+        <p>Explore the Pareto diagram below to see how our employees are distributed across different cities. 
+          The bars represent each city's employee count, with the highest counts on the left. 
+          This visual insight helps you quickly identify our key workforce locations.
+        </p>
+        <canvas id="pareto_citydistribution"></canvas>
+      </div>
+    </div>
+  </div>
+  <div id="content">
+    {% include 'chatfile8.html' %}
+  </div>
+  {% endblock %}
+
+  {% block javascript %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('static', filename='js/validate_script.js') }}"></script>  
+  <!-- Add any additional JavaScript specific to data.html here -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.5.1/plotly.min.js"></script>
+  <!-- Bootstrap JS (Make sure to include this before your custom JS, if any) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    var jsonData = {{ json_data | safe }};
+    var jsonEmpDist = {{ json_empdist | safe}};
+    var json_rankwise_empdist = {{ json_rankwise_empdist | safe }};
+  </script>
+
+  {% endblock %}

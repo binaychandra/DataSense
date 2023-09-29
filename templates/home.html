@@ -1,0 +1,72 @@
+{% extends 'lay_side.html' %}
+
+{% block css %}
+    <!-- Add any additional CSS specific to home.html here -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+{% endblock %}
+
+{% block content %}
+    <!-- Add the content specific to home.html here -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 left-column" style="background-image: url('{{ url_for('static', filename='images/labormarket.jpeg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; padding-right: 20px;background-color:rgba(0,0,0,0.2);">
+            </div>
+        <div class="col-md-6 right-column">
+            <h2 style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">User Input Page</h2>
+            <p>Please select below filters. Please note that GPNs extracted from workforce data would be used to get other datasets.</p>
+            <form method="POST">
+              <div class="form-group">
+                <label for="date_range">Date Range</label>
+                <div id="reportrange" class="form-control" name="date_range" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <input type="hidden" name="calendar_value">
+                    <span></span>
+                    <i class="fa fa-caret-down" style="float:right; margin-right:0; top:50%; position:relative; transform: translateY(-50%);"></i>
+                </div>
+            </div>
+    
+            <div class="form-group">
+                <label for="sl_subsl">SL/SSL</label>
+                <select class="form-control" id = "slssl" name="sl_subsl" required>
+                  <option value="">Select Option</option>
+                  <option value="consulting_dna">Consulting DnA</option>
+                  <option value="consulting_det">Consulting DET</option>
+                  <option value="assurance_dna">Assurance DnA</option>
+                  <option value="assurance_audit">Assurance Audit</option>
+                  <option value="tax_gcr_emeia">TAX GCR EMEIA</option>
+                  <option value="eyk_content_delivery">EYK Content Delivery</option>
+                  <option value="es_rms_iass">ES RMS IASS</option>
+                </select>
+              </div>
+    
+              <div class="form-group">
+                <label for="tbl_selected">Table(s)</label>
+                <select class="form-control" id="multiple-checkboxes" multiple="multiple" name="tbl_selected" required>
+                    <option value="workforce">Workforce</option>
+                    <option value="badges">Badges</option>
+                    <option value="learning">Learning</option>
+                    <option value="lat">LAT</option>
+                    <option value="tr">TR</option>
+                    <option value="mct">MCT</option>
+                    <option value="profqual">Profqual</option>
+                </select>  
+              </div>
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+{% endblock %}
+
+{% block javascript %}
+    <!-- Add any additional JavaScript specific to home.html here -->
+    <script src="{{url_for('static', filename='js/home_script.js')}}"></script>
+    <!-- Bootstrap Datepicker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+{% endblock %}

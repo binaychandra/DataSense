@@ -1,0 +1,50 @@
+/* .navbar {
+    background-color: black;
+} */
+
+/* .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+*/
+
+/* .navbar-toggler {
+    border-color: rgba(255, 18, 18, 0.5);
+} */
+
+/* .navbar-nav .nav-link {
+    padding: 0.5rem 0.75rem;
+    margin-left: 10px;
+    color: rgb(221, 234, 239);
+} */
+
+/* .navbar-nav .nav-link:hover {
+    color: rgb(234, 128, 41);
+} */
+
+/* .navbar-nav .nav-link.active {
+    font-weight: bold;  
+}  */
+/* 
+.navbar-nav .nav-link.active {
+    font-weight: bold !important;
+    color: rgb(235, 80, 13) !important;
+    background-color: red;
+  } */
+
+/* .navbar-brand {
+    padding-left: 100px;
+} */
+
+#navbarNav {
+    padding-right: 110px;
+}
+
+.disabled {
+    pointer-events: none;  /* Disable click events */
+    opacity: 0.6;         /* Visually indicate disabled state */
+}

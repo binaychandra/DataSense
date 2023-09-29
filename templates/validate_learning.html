@@ -1,0 +1,124 @@
+{% extends 'lay_side.html' %}
+
+{% block css %}
+<!-- style="pointer-events: none;color: #ccc;cursor: not-allowed;" -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/validate_style.css') }}">
+
+{% endblock %}
+
+{% block content %}
+<br>
+
+<!-- Dashboard Content -->
+<div class="dashboard-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Employee Count</h5>
+            <p class="card-text">{{ table_info['unique_gui'] }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Record Count</h5>
+            <p class="card-text">{{ table_info['n_rows'] }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"> # Features</h5>
+            <p class="card-text">{{ table_info['n_cols'] }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Placeholder</h5>
+            <p class="card-text">Yes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Data Validation for Learning</h3>
+        <p>We have done the validations on data given and we have categorized the data into various categories.
+          which shows good data which is displayed on right against each columns and bad data which should be either
+          processed
+          or discarded on left side against the column. Here are the results.
+        </p>
+        <canvas id="validationbar"></canvas>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Employee variation over cities for Learning</h3>
+        <p>The pareto diagram shows the distribution of employees over different cities.
+        </p>
+        <canvas id="pareto_citydistribution"></canvas>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <br>
+        {{ bar_chart_html | safe }}
+      </div>
+      <div class="col-md-4">
+        <canvas id="doughnutChart"></canvas>
+       </div>
+    </div>
+  </div>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Employee variation for badges</h3>
+        <p>The line chart below shows the variation of employees based on Rank and their count.
+        </p>
+        <canvas id="line_empdistribution"></canvas>
+      </div>
+    </div>
+  </div>
+  <br>
+  
+  {% endblock %}
+
+  {% block javascript %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/validate_script.js') }}"></script>
+  <!-- Add any additional JavaScript specific to data.html here -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.5.1/plotly.min.js"></script>
+  <!-- Bootstrap JS (Make sure to include this before your custom JS, if any) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    var labels = {{ labels | tojson }};
+    var reg_issue = {{ reg_issue | tojson }};
+    var null_issue = {{ null_issue | tojson }};
+    var ok_data = {{ ok_data | tojson }};
+    var mismatch_issue = {{ mismatch_issue | tojson }};
+    var barthinkness = 50
+  </script>
+  {% endblock %}

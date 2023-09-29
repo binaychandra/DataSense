@@ -1,0 +1,114 @@
+{% extends 'lay_side.html' %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/data_style.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css">
+    
+{% endblock %}
+
+{% block content %}
+<div class="container" style="margin-bottom: 75px;">
+    
+    <!-- First Row: Label, Dropdown, and Download Button -->
+    <div class="row" style="background-color:rgb(135, 167, 167); padding-top: 10px; padding-bottom: 10px; margin-left: 0px; margin-right: 0px;">
+      <div class="col-md-2" style="margin-left: 15px;">
+        <!-- Label for the dropdown -->
+        <label for="table-dropdown" style="margin-top: 5px; font-weight: 600;">Table Name : </label>
+      </div>
+      <div class="col-md-6">
+        <!-- Dropdown for table selection -->
+        <select id="table-dropdown" class="form-control" style="margin-left: -85px; width:200px;">
+          {% for tbl_name, _ in table_htmls.items() %}
+            <option value="{{ loop.index }}">{{ tbl_name | upper }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-3 d-flex justify-content-end align-items-center" style="margin-left: 70px;">
+        <!-- Download Button -->
+        <button class="btn btn-light" onclick="downloadTableData()">
+          <i class="fas fa-download mr-2"></i> Download All
+        </button>
+      </div>
+    </div>
+
+    <!-- Second Row: Table Contents -->
+    <div class="tab" id="tablestab" style="padding: 10px 10px 10px;">
+      {% for _, table_html in table_htmls.items() %}
+        <div class="tabcontent" id="content{{ loop.index }}">
+          {{ table_html | safe }} <!-- The "safe" filter is used to render the HTML content as-is -->
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+    <div class="fixed-button">
+      <!-- <div class="col-md-3 d-flex justify-content-end align-items-center" style="margin-left: 70px;"> -->
+        <div class="container d-flex justify-content-end align-items-center" style="margin-left: 50px;">
+            <button class="btn btn-warning" onclick="redirecttovalidation()">Proceed for validation <i class="fas fa-arrow-right"></i></button>
+        </div>
+    </div>
+    <div id="content">
+      {% include 'chatfile8.html' %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+    <!-- Add any additional JavaScript specific to data.html here -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js"></script>
+    <script src="{{ url_for('static', filename='js/data_script.js') }}"></script>
+    
+    <script>
+        $(document).ready(function () {
+          console.log("Print hello")
+            {% for tbl_name, _ in table_htmls.items() %}
+            $('#dtable_{{ tbl_name }}').DataTable({
+                scrollX: true
+            });
+            {% endfor %}
+            // document.getElementById("tab1").click();
+        });
+    </script>
+    <script>
+        // JavaScript code to handle the dropdown change event and show the corresponding content div
+        $(document).ready(function () {
+          // Show the initial selected table content on page load
+          showSelectedTableContent();
+      
+          // Handle dropdown change event
+          $('#table-dropdown').on('change', function () {
+            showSelectedTableContent();
+          });
+      
+          // Function to show the selected table content
+          function showSelectedTableContent() {
+            const selectedTableIndex = $('#table-dropdown').val();
+            $('.tabcontent').hide();
+            $('#content' + selectedTableIndex).show();
+          }
+        });
+      
+        // Function to handle the table data download
+        function downloadTableData() {
+          // Implement your download logic here
+          console.log('Downloading table data...');
+        }
+      </script>
+      <script>
+          var req_tables = {{ req_tables | safe }};
+      </script>
+      <script>
+          document.addEventListener("DOMContentLoaded", function() {
+              console.log("Entered")
+              var dropdown = document.getElementById("table-dropdown");
+              console.log("The value is , ", dropdown.value)
+              var hiddenField = document.getElementById("hiddenField");
+
+              dropdown.addEventListener("change", function() {
+                  hiddenField.value = dropdown.value;
+              });
+          });
+      </script>
+{% endblock %}

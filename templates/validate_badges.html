@@ -1,0 +1,156 @@
+{% extends 'lay_side.html' %}
+
+{% block css %}
+<!-- style="pointer-events: none;color: #ccc;cursor: not-allowed;" -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/validate_style.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<br>
+<!-- Dashboard Content -->
+<div class="dashboard-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card headstats">
+          <div class="card-body">
+            <h5 class="card-title">Employee Count</h5>
+            <p class="card-text">{{ table_info['unique_gui'] }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card headstats">
+          <div class="card-body">
+            <h5 class="card-title">Record Count</h5>
+            <p class="card-text">{{ table_info['n_rows'] }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card headstats">
+          <div class="card-body">
+            <h5 class="card-title"> # Features</h5>
+            <p class="card-text">{{ table_info['n_cols'] }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="card headstats">
+          <div class="card-body">
+            <h5 class="card-title">Placeholder</h5>
+            <p class="card-text">Yes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="h3" style="font-weight: bolder;">Data Validation for badges</h3>
+        <p>All entries have undergone thorough validation and have been meticulously categorized into specific groups.
+          The Y-axis of the input data table lists the columns against which validation checks were conducted. These
+          validations have culminated in a visually informative bar chart, offering a clear representation of the
+          percentage distribution across each validated category.
+        </p>
+        <canvas id="validationbar"></canvas>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <div class="card-body">
+                    <h5 class="card-title"><span class="badge badge-primary">Badge Earned month over month</span></h5>
+                    <p>The data shows a monthly trend in badge initiation and awarding, 
+                      with the highest initiation count in February (56) and the highest award count in January (38). 
+                      Overall, badge activity remains consistent, with variations in each month.</p>
+                    <canvas id="barchart_badgecompletionpermonth"></canvas>
+                    <!-- <p class="card-text">The organization's workforce composition is characterized by a <i class="fa-solid fa-arrow-trend-up"></i> <span style="font-size: 24px; font-weight: bolder;color: #0d3460;">13</span>% higher representation of men compared to women, resulting in a diverse and varied cultural mix within the company.</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <div class="card-body">
+                    <h5 class="card-title"><span class="badge badge-info">Pillar distribution across badges</span></h5>
+                    <p>The chart below shows the distribution of pillars across badges</p>
+                    <canvas id="doughnutChart2"></canvas>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  <br>
+  <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <div class="card-body">
+                    <h5 class="card-title"><span class="badge badge-primary">Structured vs Unstructured</span></h5>
+                    <!-- <p>The following chart shows the distribution of Badge Type</p> -->
+                    <canvas id="doughnutchart_strvsunstr"></canvas>
+                    <!-- <p class="card-text">The organization's workforce composition is characterized by a <i class="fa-solid fa-arrow-trend-up"></i> <span style="font-size: 24px; font-weight: bolder;color: #0d3460;">13</span>% higher representation of men compared to women, resulting in a diverse and varied cultural mix within the company.</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                <div class="card-body">
+                    <h5 class="card-title"><span class="badge badge-info">Badge Title Distribution</span></h5>
+                    <p class="card-text">
+                        {% for item in lst_topfive_badgetitle %}
+                        <span class="badge badge-secondary"> {{ item }} </span>
+                        {% endfor %}
+                    </p>
+                    <p>The most interest lies in Agile Learning and Data Integration, with a strong focus on skill
+                      develop ment. Data Visualization and Cloud Learning are also popular, reflecting a growing interest 
+                      in data presentation and cloud technologies. Robotic Process Automation badges signify a commitment
+                       to automation skills, while Data Science Learning badges show an emerging interest in data science.  
+                       These badges offer valuable opportunities for personal and professional growth.</p>
+                </div>
+            </div>
+        </div>
+      </div>
+  </div>
+  <br>
+
+  <div id="content">
+    {% include 'chatfile8.html' %}
+  </div>
+  
+  {% endblock %}
+
+  {% block javascript %}
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/validate_script.js') }}"></script>
+  <!-- Add any additional JavaScript specific to data.html here -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/1.5.1/plotly.min.js"></script>
+  <!-- Bootstrap JS (Make sure to include this before your custom JS, if any) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    var jsonData = {{ json_data | safe }};
+    var json_pillar_data = {{ json_pillar_data | safe }};
+    var json_badgecompletion_data = {{ json_badgecompletion_data | safe }};
+  </script>
+  {% endblock %}
+
+  <!-- var labels = {{ labels | tojson }};
+  var pattern_issue = {{ pattern_issue | tojson }};
+  var null_issue = {{ null_issue | tojson }};
+  var good_data = {{ good_data | tojson }}; -->

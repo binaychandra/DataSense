@@ -1,0 +1,12 @@
+Faker==19.6.1
+Flask==2.2.2
+Flask_Bootstrap==3.3.7.1
+langchain==0.0.304
+openai==0.27.8
+pandas==2.0.3
+plotly==5.14.1
+pyodbc==4.0.32
+python-dotenv==1.0.0
+Requests==2.31.0
+SQLAlchemy==1.4.42
+urllib3==1.26.14

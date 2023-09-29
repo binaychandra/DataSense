@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Font Awesome Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <canvas id="paretoChart"></canvas>
+  </div>
+</body>
+<script>
+  // Sample data for the Pareto diagram
+  var data = {
+      labels: ['Category A', 'Category B', 'Category C', 'Category D', 'Category E'],
+      datasets: [
+          {
+              label: 'Frequency',
+              data: [15, 10, 25, 5, 30],
+              backgroundColor: 'rgba(75, 192, 192, 0.7)',
+              yAxisID: 'primary',
+          },
+      ],
+  };
+
+  // Calculate cumulative percentage
+  var cumulativePercentage = [0];
+  var total = data.datasets[0].data.reduce((acc, value) => acc + value, 0);
+  data.datasets[0].data.forEach(value => {
+      cumulativePercentage.push((cumulativePercentage[cumulativePercentage.length - 1] + value) / total * 100);
+  });
+
+  // Create the secondary dataset for the cumulative percentage line
+  data.datasets.push({
+      label: 'Cumulative Percentage',
+      data: cumulativePercentage,
+      borderColor: 'rgba(255, 99, 132, 1)',
+      backgroundColor: 'rgba(255, 99, 132, 0.2)',
+      yAxisID: 'secondary',
+      type: 'line',
+  });
+
+  // Get the canvas context
+  var ctx = document.getElementById('paretoChart').getContext('2d');
+
+  // Create the multi-axis Pareto diagram with options
+  var paretoChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: {
+          scales: {
+              x: {
+                  display: true,
+                  title: {
+                      display: true,
+                      text: 'Categories',
+                  },
+              },
+              primary: {
+                  type: 'linear',
+                  position: 'left',
+                  beginAtZero: true,
+                  display: true,
+                  title: {
+                      display: true,
+                      text: 'Frequency',
+                  },
+              },
+              secondary: {
+                  type: 'linear',
+                  position: 'right',
+                  beginAtZero: true,
+                  display: true,
+                  title: {
+                      display: true,
+                      text: 'Cumulative Percentage (%)',
+                  },
+                  grid: {
+                      drawOnChartArea: false, // Hide grid lines for the secondary axis
+                  },
+              },
+          },
+          plugins: {
+              legend: {
+                  display: true,
+              },
+          },
+      },
+  });
+</script>
+
+</html>
