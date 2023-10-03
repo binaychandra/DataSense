@@ -7,7 +7,6 @@ plotly==5.14.1
 pyodbc==4.0.32
 python-dotenv==0.21.1
 Requests==2.31.0
-werkzeug==0.16.0
 SQLAlchemy==1.4.42
 urllib3==1.26.14
 waitress==2.1.2
