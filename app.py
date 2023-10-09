@@ -232,34 +232,5 @@ def hometest():
         session['tbl_selected'] = request.form.getlist('tbl_selected')
         return redirect(url_for('data'))
 
-@app.route('/downloaddata', methods=['GET'])
-def download_data():
-    # Fetch all records from the SQL Server database
-    print("Inside download data ")
-    server, database = 'eunuinthi4sql01.database.windows.net', 'EUNUINTHI4SDB01'
-    username, password = 'INTHI4DBAdmin01', 'KsIomKFEfHsitq2'
-    conn_str = f'mssql+pyodbc://{username}:{password}@{server}/{database}?driver=ODBC+Driver+17+for+SQL+Server'
-    engine = create_engine(conn_str)
-    query = "select * from badges"
-    df = pd.read_sql(query, engine)
-    df = pd.DataFrame({"A":[1,2,3], "B":['AA', "BB", "CC"], "C":["Hello", "World", "ABC"]})
-    strdf = df.to_csv(index=False)
-    response = make_response(strdf)
-    response.headers['Content-type'] = 'text/csv'
-    response.headers['Content-Disposition'] = 'attachment; filename=customers.csv'
-    return response
-
-def generate_large_csv():
-    server, database = 'eunuinthi4sql01.database.windows.net', 'EUNUINTHI4SDB01'
-    username, password = 'INTHI4DBAdmin01', 'KsIomKFEfHsitq2'
-    conn_str = f'mssql+pyodbc://{username}:{password}@{server}/{database}?driver=ODBC+Driver+17+for+SQL+Server'
-    engine = create_engine(conn_str)
-    query = "select * from tr_processed"
-    df = pd.read_sql(query, engine)
-    print("DF done ")
-    # Yield rows of the DataFrame as CSV lines
-    for row in df.itertuples(index=False):
-        yield ','.join(map(str, row)) + '\n'
-
 if __name__ == '__main__':
     app.run(debug=True)
