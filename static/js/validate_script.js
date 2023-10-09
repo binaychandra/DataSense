@@ -397,25 +397,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 pointHoverRadius: 8,
                 // fill:true,
             },
-            // {
-            //     label: 'Director',
-            //     data: dist_director,
-            //     borderColor: 'rgba(34, 62, 119,0.5)',
-            //     // backgroundColor: 'rgba(193, 240, 240,0.2)',
-            //     borderWidth: 5,
-            //     pointRadius: 6,
-            //     // pointHoverRadius: 6,
-            // },
-            // {
-            //     label: 'Partner/Principal',
-            //     data: dist_partner,
-            //     borderColor: 'rgba(34, 62, 119,0.7)',
-            //     // backgroundColor: 'rgba(255, 245, 204,0.2)',
-            //     borderWidth: 5,
-            //     pointRadius: 5,
-            //     // pointHoverRadius: 6,
-            // },
-            // Add more datasets for additional line charts if needed
             {
                 label: 'Total Count',
                 data: [55, 60, 65, 50, 60, 61, 50],
@@ -557,6 +538,21 @@ document.addEventListener("DOMContentLoaded", function () {
       
       msgerChat.insertAdjacentHTML("beforeend", msgHTML);
       msgerChat.scrollTop += 500;
+
+      setTimeout(function() {
+        const loadHTML = `
+           <div id="loading-div">
+                 <div class="spinner-grow spinner-grow-sm text-light" role="status" style="margin-left:40px">
+                     <span class="visually-hidden">Loading...</span>
+                 </div>
+                 <div class="spinner-border spinner-border-sm text-light" role="status">
+                     <span class="visually-hidden">Loading...</span>
+                 </div>
+             </div>
+        `;
+        msgerChat.insertAdjacentHTML("beforeend", loadHTML);
+        msgerChat.scrollTop += 500;
+        }, 1000);
     }
   
     function botResponse(rawText) {
@@ -598,6 +594,16 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         
         var chart_data = JSON.parse(responseData.chart_json_data);
+
+        // clear the loading icon
+        // Get the element by its ID
+        var element = document.getElementById("loading-div");
+        // Check if the element exists before attempting to remove it
+        if (element) {
+            element.remove(); // Remove the element
+        } else {
+            console.log("Loading div not found");
+        }
 
         const msgHTML = `
           <div class="bot-message">
