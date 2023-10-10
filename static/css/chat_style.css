@@ -1,0 +1,191 @@
+.sidechatpanel {
+    width: 400px;
+    position: fixed;
+    top: 56px;
+    opacity: 0.98;
+    z-index: 3;
+    right: -400px;
+    padding-bottom: 60px;
+    height: calc(100vh - 55px);
+    background-color: #2e2e2e;
+    transition: right 0.3s ease-in-out;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: auto;
+    box-shadow: -5px 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.sidechatpanel.show {
+    right: 0;
+}
+
+.msger-header {
+    background-color: revert;
+    color: cornsilk;
+    text-align: center;
+    margin-top: -5px;
+    padding: 12px 5px 5px 20px;
+    /* font-weight: bolder; */
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 0 rgba(22, 0, 0, 0.2);
+    font-style: oblique;
+    padding-top: -5px;
+}
+
+.msger-send-btn {
+    background-color: transparent;
+    border: none;
+    padding: 10px;
+    width: 24px;
+    height: 24px;
+    background-image: url('/static/images/send5.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.msger-inputarea {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 6px;
+    background-color: #000000;
+}
+
+.msger-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #cdcdca;
+    overflow: hidden;
+}
+
+.msger-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+
+.msger-input button {
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.chat-container {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - 110px);
+    max-width: auto;
+    margin: 10 auto;
+    scroll-behavior: auto;
+    overflow-y: auto;
+}
+
+.chat-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+}
+
+/* Hide the scrollbar track */
+.chat-container::-webkit-scrollbar-track {
+    display: none;
+}
+
+.user-message {
+    display: flex;
+    font-size: 500;
+    margin-bottom: 10px;
+    color: gold;
+    border-radius: 5px;
+}
+
+.bot-message {
+    display: flex;
+    color: rgb(209, 243, 244);
+    margin-bottom: 10px;
+}
+
+.user-icon {
+    margin-top: 8px;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    background-image: url('/static/images/user6.png');
+    background-size: cover;
+    margin-right: 10px;
+}
+
+.bot-icon {
+    margin-top: 8px;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    color: white;
+    text-align: center;
+    line-height: 40px;
+    background-image: url('/static/images/bot.png');
+    background-size: cover;
+    margin-right: 10px;
+}
+
+.bot-message-bubble {
+    flex: 1;
+    font-size: small;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: #1f2b37;
+    box-shadow: -4px 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.user-message-bubble {
+    flex: 1;
+    font-size: small;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: #1f2b37;
+    box-shadow: -4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.closebtn {
+    cursor: pointer;
+    color: darkgrey;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.closebtn:hover {
+    color: coral;
+}
+
+.toggle-button {
+    position: fixed;
+    top: 65px;
+    height: 37px;
+    right: -10px;
+    background-color: #8fadc7;
+    color: white;
+    /* padding: 10px 10px; */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
